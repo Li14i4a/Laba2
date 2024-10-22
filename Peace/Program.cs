@@ -12,22 +12,27 @@ namespace Peace
     {
         static void Main(string[] args)
         {
-            string test = "17.02.2022             20:30:48                \"Джордж Хендрикс\"";
-            Subject ToObj(string str)
+            string test = "Subject 17.02.2022              20:30:48                \"Джордж Хендрикс\"";
+
+            switch (test.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[0])
+            { 
+                case "Subject":
+                {
+                        Subject testObj = ToSubject(test.Replace("Subject", ""));
+                        Console.WriteLine($"Дата: {testObj.Date.ToString("dd.MM.yyyy")}\nВремя: {testObj.Time}\nИмя: {testObj.Name}");
+                        break;
+                }
+            }
+            Console.ReadKey();
+            Subject ToSubject(string str)
             {
-                str = str.Trim();
-                List<string> items = str.Split('"').ToList();
-                string name = "";
-                List<string> values = new List<string>();
-                values = items[0].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).ToList();
-                name = items[1].Trim();
+                List<string> items = str.Trim().Split('"').ToList();
+                List<string> values = items[0].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).ToList();
+                string name = items[1].Trim();
                 DateTime date = DateTime.Parse(values[0].Trim()).Date;
                 TimeSpan time = DateTime.Parse(values[1].Trim()).TimeOfDay;
                 return new Subject(date, time, name);
             }
-            Subject testObj = ToObj(test);
-            Console.WriteLine($"Дата: {testObj.Date.ToString("dd.MM.yyyy")}\nВремя: {testObj.Time}\nИмя: {testObj.Name}");
-            Console.ReadKey();
         }
     }
 }
