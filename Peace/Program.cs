@@ -17,13 +17,13 @@ namespace Peace
             string test2 = "SubjectWithDifficultyLevel 17.02.2022              20:30:48                \"Джордж Хендрикс\" 6";
             string test3 = "SubjectWithType 17.02.2022              20:30:48                \"Джордж Хендрикс\" Зачет";
             List<string> test4 = File.ReadAllText("../../Test.txt").Split('\n').ToList();
-            Console.WriteLine("Тест 1\n"+result(test));
-            Console.WriteLine("Тест 2\n" + result(test2));
-            Console.WriteLine("Тест 3\n" + result(test3));
+            Console.WriteLine($"Тест 1\n{result(test)}");
+            Console.WriteLine($"Тест 2\n{result(test2)}");
+            Console.WriteLine($"Тест 3\n{result(test3)}");
             int i = 4;
-            foreach (string items in  test4) 
+            foreach (string items in test4)
             {
-                Console.WriteLine($"Тест {i}"+"\n"+result(items));
+                Console.WriteLine($"Тест {i}\n{result(items)}");
                 i++;
             }
             Console.ReadKey();
