@@ -14,6 +14,7 @@ namespace Peace
             string test = "17.02.2022             20:30:48                \"Джордж оавлыд\"";
             Subject ToObj(string str)
             {
+                //
                 str = str.Trim();
                 List<string> items = str.Split('"').ToList();
                 if (items.Count == 3) 
