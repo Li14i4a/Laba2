@@ -9,7 +9,7 @@ namespace Peace
     internal class SubjectWithType : Subject
     {
         public string TypeOfSubject { get; set; }
-        public SubjectWithType(string typeOfSubject, DateTime date, TimeSpan time, string name) : base(date, time, name)
+        public SubjectWithType(DateTime date, TimeSpan time, string name, string typeOfSubject) : base(date, time, name)
         {
             TypeOfSubject = typeOfSubject;
         }
