@@ -14,29 +14,11 @@ namespace Peace
         {
             string test = "Subject 17.02.2022              20:30:48                \"Джордж Хендрикс\"";
             string test2 = "SubjectWithDifficultyLevel 17.02.2022              20:30:48                \"Джордж Хендрикс\" 6";
-            string test3 = "SubjectWithDifficultyLevel 17.02.2022              20:30:48                \"Джордж Хендрикс\" Зачет";
+            string test3 = "SubjectWithType 17.02.2022              20:30:48                \"Джордж Хендрикс\" Зачет";
 
-            switch (test3.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[0])
-            { 
-                case "Subject":
-                {
-                    Subject testObj = ToSubject(test.Replace("Subject", ""));
-                    Console.WriteLine($"Дата: {testObj.Date.ToString("dd.MM.yyyy")}\nВремя: {testObj.Time}\nИмя: {testObj.Name}");
-                    break;
-                }
-                case "SubjectWithDifficultyLevel":
-                {
-                    SubjectWithDifficultyLevel testObj = ToSubjectWithDifficultyLevel(test2.Replace("SubjectWithDifficultyLevel", ""));
-                    Console.WriteLine($"Дата: {testObj.Date.ToString("dd.MM.yyyy")}\nВремя: {testObj.Time}\nИмя: {testObj.Name}\nУровень сложности: {testObj.DifficultyLevel}");
-                    break;
-                }
-                case "SubjectWithType":
-                {
-                    SubjectWithType testObj = ToSubjectWithType(test3.Replace("SubjectWithDifficultyLevel", ""));
-                    Console.WriteLine($"Дата: {testObj.Date.ToString("dd.MM.yyyy")}\nВремя: {testObj.Time}\nИмя: {testObj.Name}\nУровень сложности: {testObj.TypeOfSubject}");
-                    break;
-                }
-            }
+            Console.WriteLine(result(test));
+            Console.WriteLine(result(test2));
+            Console.WriteLine(result(test3));
             Console.ReadKey();
             Subject ToSubject(string str)
             {
@@ -66,6 +48,28 @@ namespace Peace
                 TimeSpan time = DateTime.Parse(values[1].Trim()).TimeOfDay;
                 string type = items[2].Trim();
                 return new SubjectWithType(date, time, name, type);
+            }
+            string result(string str)
+            { 
+                switch (str.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[0])
+                {
+                    case "Subject":
+                        {
+                            Subject Obj = ToSubject(str.Replace("Subject", ""));
+                            return($"Дата: {Obj.Date.ToString("dd.MM.yyyy")}\nВремя: {Obj.Time}\nИмя: {Obj.Name}");
+                        }
+                    case "SubjectWithDifficultyLevel":
+                        {
+                            SubjectWithDifficultyLevel Obj = ToSubjectWithDifficultyLevel(str.Replace("SubjectWithDifficultyLevel", ""));
+                            return($"Дата: {Obj.Date.ToString("dd.MM.yyyy")}\nВремя: {Obj.Time}\nИмя: {Obj.Name}\nУровень сложности: {Obj.DifficultyLevel}");
+                        }
+                    case "SubjectWithType":
+                        {
+                            SubjectWithType Obj = ToSubjectWithType(str.Replace("SubjectWithType", ""));
+                            return($"Дата: {Obj.Date.ToString("dd.MM.yyyy")}\nВремя: {Obj.Time}\nИмя: {Obj.Name}\nУровень сложности: {Obj.TypeOfSubject}");
+                        }
+                }
+                return ("что-то пошло не так");
             }
         }
     }
